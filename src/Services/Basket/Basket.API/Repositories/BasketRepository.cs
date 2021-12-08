@@ -12,7 +12,7 @@ namespace Basket.API.Repositories
 
         public BasketRepository(IDistributedCache redisCache)
         {
-            _redisCache = redisCache;
+            _redisCache = redisCache; 
         }
 
         public async Task DeleteBasket(string UserName)
