@@ -1,0 +1,29 @@
+using Discount.API.Extensions;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace Discount.API
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            //create extension method
+
+            var host = CreateHostBuilder(args).Build();
+            host.MigrateDatabase<Program>();
+            host.Run();
+
+            CreateHostBuilder(args)
+                .Build()
+                .Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}
