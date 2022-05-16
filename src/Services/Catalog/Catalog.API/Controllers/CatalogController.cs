@@ -28,6 +28,9 @@ namespace Catalog.API.Controllers
         }
 
 
+        #region CRUD Catalog
+
+
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
@@ -85,6 +88,8 @@ namespace Catalog.API.Controllers
         {
             return Ok(await _repository.DeleteProduct(id));
         }
+
+        #endregion
 
 
     }

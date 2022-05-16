@@ -30,7 +30,7 @@ namespace Basket.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{userName}", Name = "GetBasket")]
+        [HttpGet("{userName}", Name = "GetBasket")] //ApiGateway OK
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCart>> GetBasket(string userName)
         {
@@ -45,7 +45,7 @@ namespace Basket.API.Controllers
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket)
         {
 
-            // TODO: Communicate with Discount.Grpc and calculate lastest prices of prodcut into shopping cart
+            // TODO: Communicate with Discount.Grpc and calculate lastest prices of product into shopping cart
 
             foreach (var item in basket.Items)
             {
@@ -58,7 +58,7 @@ namespace Basket.API.Controllers
             return Ok(await _repository.UpdateBasket(basket));
         }
 
-        [HttpDelete("{userName}", Name = "DeleteBasket")]
+        [HttpDelete("{userName}", Name = "DeleteBasket")] //ApiGateway OK
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
 
         public async Task<IActionResult> DeleteBasket(string userName)
@@ -67,7 +67,7 @@ namespace Basket.API.Controllers
             return Ok();
         }
 
-        [Route("[action]")]
+        [Route("[action]")]//ApiGateway OK
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Accepted)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

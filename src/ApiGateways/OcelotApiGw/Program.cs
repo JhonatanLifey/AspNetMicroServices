@@ -18,16 +18,20 @@ namespace OcelotApiGw
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureLogging((hostingContext, loggingbuilder) =>
-                {
-                    loggingbuilder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    loggingbuilder.AddConsole();
-                    loggingbuilder.AddDebug();
-                });
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true); //When the application start use this .json
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .ConfigureLogging((hostingContext, loggingbuilder) =>
+            {
+                loggingbuilder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                loggingbuilder.AddConsole();
+                loggingbuilder.AddDebug();
+            });
 
     }
 }
